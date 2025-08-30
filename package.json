@@ -1,0 +1,12 @@
+{
+  "name": "mongodb-test",
+  "version": "1.0.0",
+  "description": "MongoDB connection test",
+  "main": "mongodb-test.js",
+  "scripts": {
+    "start": "node mongodb-test.js"
+  },
+  "dependencies": {
+    "mongodb": "^6.3.0"
+  }
+}
