@@ -14,7 +14,7 @@ router.post('/create-checkout-session', auth, async (req: AuthRequest, res) => {
       return res.status(400).json({ message: 'Cart items are required' });
     }
 
-    const session = await createCheckoutSession(req.user._id.toString(), cartItems);
+    const session = await createCheckoutSession(req.user.userId, cartItems);
     
     res.json({
       sessionId: session.id,

@@ -9,8 +9,8 @@ import { Server } from 'socket.io';
 import dotenv from 'dotenv';
 
 // Import configurations
-import { connectDB } from './config/database';
-import { connectRedis } from './config/redis';
+import { connectDB, isDBConnected } from './config/database';
+// Redis connection will be imported dynamically when needed
 
 // Import middleware
 import { errorHandler } from './middleware/errorHandler';
@@ -95,6 +95,28 @@ if (NODE_ENV === 'development') {
   app.use(morgan('combined'));
 }
 
+// Root endpoint
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'Welcome to NexusHub API',
+    version: '1.0.0',
+    status: 'running',
+    timestamp: new Date().toISOString(),
+    endpoints: {
+      health: '/health',
+      auth: '/api/auth',
+      users: '/api/users',
+      products: '/api/products',
+      orders: '/api/orders',
+      videos: '/api/videos',
+      social: '/api/social',
+      gaming: '/api/gaming',
+      upload: '/api/upload',
+      payments: '/api/payments'
+    }
+  });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({
@@ -127,15 +149,20 @@ app.use(errorHandler);
 // Start server function
 async function startServer() {
   try {
-    // Connect to MongoDB
-    await connectDB();
-    console.log('✅ MongoDB connected successfully');
-
-    // Connect to Redis (optional)
-    if (process.env.REDIS_URL) {
-      await connectRedis();
-      console.log('✅ Redis connected successfully');
+    // Connect to MongoDB (optional for development)
+    try {
+      await connectDB();
+      if (isDBConnected()) {
+        console.log('✅ MongoDB connected successfully');
+      } else {
+        console.log('⚠️ MongoDB connection failed, continuing without database');
+      }
+    } catch (error) {
+      console.log('⚠️ MongoDB connection failed, continuing without database');
     }
+
+    // Redis connection disabled for now to prevent error spam
+    console.log('⚠️ Redis connection disabled for development');
 
     // Start HTTP server
     server.listen(PORT, () => {

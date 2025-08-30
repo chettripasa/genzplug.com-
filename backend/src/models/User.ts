@@ -20,6 +20,8 @@ export interface IUser extends Document {
     product: mongoose.Types.ObjectId;
     quantity: number;
   }>;
+  followers: mongoose.Types.ObjectId[];
+  following: mongoose.Types.ObjectId[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -97,14 +99,20 @@ const UserSchema = new Schema<IUser>({
       required: true,
       min: 1
     }
+  }],
+  followers: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
+  following: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   }]
 }, {
   timestamps: true
 });
 
 // Indexes for better query performance
-UserSchema.index({ username: 1 });
-UserSchema.index({ email: 1 });
 UserSchema.index({ role: 1 });
 UserSchema.index({ isBanned: 1 });
 UserSchema.index({ moderationStatus: 1 });

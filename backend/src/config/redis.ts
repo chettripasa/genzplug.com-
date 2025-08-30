@@ -4,25 +4,52 @@ let redisClient: any = null;
 
 export const connectRedis = async (): Promise<void> => {
   try {
-    const redisUrl = process.env['REDIS_URL'] || 'redis://localhost:6379';
+    // Only try to connect if REDIS_URL is explicitly set
+    if (!process.env['REDIS_URL']) {
+      console.log('⚠️ No REDIS_URL set, skipping Redis connection');
+      return;
+    }
+    
+    const redisUrl = process.env['REDIS_URL'];
+    
+    // Clean up existing client if any
+    if (redisClient) {
+      try {
+        await redisClient.quit();
+      } catch (e) {
+        // Ignore cleanup errors
+      }
+      redisClient = null;
+    }
     
     redisClient = createClient({
       url: redisUrl,
     });
 
+    // Remove any existing listeners to prevent duplicates
+    redisClient.removeAllListeners();
+
     redisClient.on('error', (err: any) => {
       console.log('❌ Redis connection error:', err.message);
+      // Don't let Redis errors crash the app
     });
 
     redisClient.on('connect', () => {
       console.log('✅ Redis connected successfully');
     });
 
-    await redisClient.connect();
+    // Set a timeout for Redis connection
+    const connectionPromise = redisClient.connect();
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('Redis connection timeout')), 5000);
+    });
+
+    await Promise.race([connectionPromise, timeoutPromise]);
     
   } catch (error) {
     console.log('⚠️ Redis connection failed (optional for development):', error);
     // Redis is optional for development, so we don't exit
+    redisClient = null;
   }
 };
 

@@ -42,3 +42,4 @@ app.listen(PORT, () => {
   console.log(`🔗 Videos: http://localhost:${PORT}/api/videos`);
   console.log(`🔗 Payments: http://localhost:${PORT}/api/payments/test`);
 });
+

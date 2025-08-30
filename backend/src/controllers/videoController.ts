@@ -28,7 +28,7 @@ export const uploadVideo = async (req: AuthRequest, res: Response): Promise<void
       description,
       category,
       tags: tags ? tags.split(',').map((tag: string) => tag.trim()) : [],
-      owner: req.user._id,
+      owner: req.user.userId,
       status: 'uploaded',
       filePath: req.file.path // Temporary path from multer
     });

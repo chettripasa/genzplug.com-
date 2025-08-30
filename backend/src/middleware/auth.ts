@@ -3,10 +3,13 @@ import jwt from 'jsonwebtoken';
 import User, { IUser } from '../models/User';
 
 export interface AuthRequest extends Request {
-  user?: IUser;
+  user?: {
+    userId: string;
+    role: string;
+  };
 }
 
-export const auth = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
+export const authenticateToken = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
   try {
     const token = req.header('Authorization')?.replace('Bearer ', '');
 
@@ -16,23 +19,31 @@ export const auth = async (req: AuthRequest, res: Response, next: NextFunction):
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as any;
-    const user = await User.findById(decoded.userId).select('-password');
-
-    if (!user) {
-      res.status(401).json({ message: 'Invalid token.' });
+    
+    if (!decoded.userId) {
+      res.status(401).json({ message: 'Invalid token format.' });
       return;
     }
 
-    req.user = user;
+    req.user = {
+      userId: decoded.userId,
+      role: decoded.role
+    };
+    
     next();
   } catch (error) {
     res.status(401).json({ message: 'Invalid token.' });
   }
 };
 
+// Legacy auth function for backward compatibility
+export const auth = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
+  return authenticateToken(req, res, next);
+};
+
 export const adminAuth = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
   try {
-    await auth(req, res, () => {});
+    await authenticateToken(req, res, () => {});
     
     if (req.user.role !== 'admin') {
       res.status(403).json({ message: 'Access denied. Admin privileges required.' });

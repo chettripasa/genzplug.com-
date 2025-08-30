@@ -1,14 +1,15 @@
 import express from 'express';
+import { register, login, getCurrentUser, updateProfile } from '../controllers/userController';
+import { authenticateToken } from '../middleware/auth';
 
 const router = express.Router();
 
-// Basic auth routes - you can expand these later
-router.post('/register', (req, res) => {
-  res.json({ message: 'Register endpoint - to be implemented' });
-});
+// Public routes
+router.post('/register', register);
+router.post('/login', login);
 
-router.post('/login', (req, res) => {
-  res.json({ message: 'Login endpoint - to be implemented' });
-});
+// Protected routes
+router.get('/me', authenticateToken, getCurrentUser);
+router.put('/profile', authenticateToken, updateProfile);
 
 export default router;
