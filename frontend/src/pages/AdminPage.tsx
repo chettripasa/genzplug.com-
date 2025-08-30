@@ -8,28 +8,20 @@ const AdminService = MockAdminService;
 import { useNotificationStore } from '../stores/notificationStore';
 import { 
   Users, 
-  ShoppingBag, 
-  Video, 
-  MessageSquare, 
   TrendingUp, 
   Settings, 
-  Shield, 
   AlertTriangle,
+  BarChart3,
+  FileText,
+  RefreshCw,
+  ShoppingBag,
+  Video,
+  Shield,
+  Search,
+  UserX,
   CheckCircle,
   XCircle,
-  Trash2,
-  Eye,
-  BarChart3,
-  Activity,
-  DollarSign,
-  FileText,
-  UserCheck,
-  UserX,
-  Clock,
-  Filter,
-  Search,
-  Download,
-  RefreshCw
+  Trash2
 } from 'lucide-react';
 
 interface TabData {

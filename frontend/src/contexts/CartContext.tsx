@@ -34,11 +34,19 @@ const cartReducer = (state: Cart, action: CartAction): Cart => {
             : item
         );
       } else {
-        // Add new item
-        newItems = [...state.items, { product, quantity }];
+        // Add new item with proper CartItem structure
+        const newItem: CartItem = {
+          _id: product._id,
+          product,
+          quantity,
+          name: product.name,
+          price: product.price,
+          image: product.images[0] || undefined
+        };
+        newItems = [...state.items, newItem];
       }
       
-      const newTotal = newItems.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+      const newTotal = newItems.reduce((sum, item) => sum + (item.price! * item.quantity), 0);
       const newItemCount = newItems.reduce((sum, item) => sum + item.quantity, 0);
       
       return {

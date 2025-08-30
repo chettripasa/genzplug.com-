@@ -1,5 +1,3 @@
-import { useNotificationStore } from '../stores/notificationStore';
-
 export interface UploadProgress {
   loaded: number;
   total: number;
@@ -33,12 +31,12 @@ export class UploadService {
       // Create form data
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'nexushub');
+      formData.append('upload_preset', import.meta.env['VITE_CLOUDINARY_UPLOAD_PRESET'] || 'nexushub');
       formData.append('folder', folder);
 
       // Upload with progress tracking
       const result = await this.uploadWithProgress(
-        `${import.meta.env.VITE_CLOUDINARY_URL || 'https://api.cloudinary.com/v1_1/your-cloud-name'}/image/upload`,
+        `${import.meta.env['VITE_CLOUDINARY_URL'] || 'https://api.cloudinary.com/v1_1/your-cloud-name'}/image/upload`,
         formData,
         onProgress
       );
@@ -68,7 +66,7 @@ export class UploadService {
       // Create form data
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'nexushub');
+      formData.append('upload_preset', import.meta.env['VITE_CLOUDINARY_UPLOAD_PRESET'] || 'nexushub');
       formData.append('folder', folder);
       formData.append('resource_type', 'video');
       formData.append('eager', 'sp_full_hd,w_1280,h_720,c_fill,g_auto');
@@ -76,7 +74,7 @@ export class UploadService {
 
       // Upload with progress tracking
       const result = await this.uploadWithProgress(
-        `${import.meta.env.VITE_CLOUDINARY_URL || 'https://api.cloudinary.com/v1_1/your-cloud-name'}/video/upload`,
+        `${import.meta.env['VITE_CLOUDINARY_URL'] || 'https://api.cloudinary.com/v1_1/your-cloud-name'}/video/upload`,
         formData,
         onProgress
       );
@@ -101,10 +99,11 @@ export class UploadService {
     folder: string = 'nexushub'
   ): Promise<UploadResult[]> {
     const results: UploadResult[] = [];
-    const totalFiles = files.length;
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
+      if (!file) continue; // Skip undefined files
+      
       try {
         let result: UploadResult;
 

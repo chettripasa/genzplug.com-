@@ -36,7 +36,7 @@ const RegisterPage: React.FC = () => {
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
-      await registerUser(data);
+      await registerUser(data.username, data.email, data.password);
       navigate('/dashboard');
     } catch (error) {
       // Error is handled by the auth context

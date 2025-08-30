@@ -3,6 +3,13 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+
+# Production builds
+dist/
+build/
+.next/
+out/
 
 # Environment variables
 .env
@@ -11,10 +18,21 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# Build outputs
-dist/
-build/
-*.tsbuildinfo
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
 # Logs
 logs/
@@ -57,68 +75,48 @@ jspm_packages/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
-.env.test
-
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache
 
-# Next.js build output
-.next
+# Vite
+.vite
 
-# Nuxt.js build / generate output
-.nuxt
+# TypeScript cache
+*.tsbuildinfo
 
-# Gatsby files
-.cache/
-public
+# Optional stylelint cache
+.stylelintcache
 
-# Storybook build outputs
-.out
-.storybook-out
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
 
 # Temporary folders
 tmp/
 temp/
-
-# Editor directories and files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
 
 # Uploads
 uploads/
 *.mp4
 *.avi
 *.mov
-*.mkv
+*.wmv
 
 # Database
 *.db
 *.sqlite
+*.sqlite3
 
 # SSL certificates
+ssl/
 *.pem
 *.key
 *.crt
 
 # Docker
 .dockerignore
-Dockerfile
-docker-compose.yml
 docker-compose.override.yml
 
-# Vercel
-.vercel
+# Backup files
+*.bak
+*.backup

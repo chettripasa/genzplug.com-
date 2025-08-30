@@ -7,14 +7,10 @@ import { StripeService } from '../services/stripeService';
 import { 
   CreditCard, 
   Lock, 
-  Truck, 
   CheckCircle, 
   ArrowLeft,
   Shield,
-  Clock,
-  MapPin,
-  Phone,
-  Mail
+  MapPin
 } from 'lucide-react';
 
 interface CheckoutForm {
@@ -177,26 +173,11 @@ const CheckoutPage: React.FC = () => {
     
     try {
       // Create checkout session
-      const session = await StripeService.createCheckoutSession({
-        items: items.map(item => ({
-          id: item._id,
-          quantity: item.quantity,
-        })),
-        customerEmail: formData.email,
-        shippingAddress: {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          address: formData.address,
-          city: formData.city,
-          state: formData.state,
-          zipCode: formData.zipCode,
-          country: formData.country,
-        },
-        metadata: {
-          userId: user?._id || '',
-          saveInfo: formData.saveInfo.toString(),
-        },
-      });
+      const session = await StripeService.createCheckoutSession(
+        items,
+        `${window.location.origin}/checkout?success=true`,
+        `${window.location.origin}/checkout?canceled=true`
+      );
 
       // Redirect to Stripe checkout
       await StripeService.redirectToCheckout(session.id);
@@ -237,10 +218,6 @@ const CheckoutPage: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const formatCardNumber = (number: string) => {
-    return number.replace(/\s/g, '').replace(/(\d{4})/g, '$1 ').trim();
   };
 
   if (items.length === 0 && step !== 'complete') {
@@ -661,7 +638,7 @@ const CheckoutPage: React.FC = () => {
                               <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
                             </div>
                           </div>
-                          <p className="font-medium text-gray-900">${(item.price * item.quantity).toFixed(2)}</p>
+                          <p className="font-medium text-gray-900">${(item.product.price * item.quantity).toFixed(2)}</p>
                         </div>
                       ))}
                     </div>
@@ -730,7 +707,7 @@ const CheckoutPage: React.FC = () => {
                       <span className="text-gray-600">
                         {item.name} × {item.quantity}
                       </span>
-                      <span className="font-medium">${(item.price * item.quantity).toFixed(2)}</span>
+                      <span className="font-medium">${(item.product.price * item.quantity).toFixed(2)}</span>
                     </div>
                   ))}
                 </div>

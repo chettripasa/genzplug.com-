@@ -33,7 +33,7 @@ const LoginPage: React.FC = () => {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      await login(data);
+      await login(data.email, data.password);
       navigate(from, { replace: true });
     } catch (error) {
       // Error is handled by the auth context

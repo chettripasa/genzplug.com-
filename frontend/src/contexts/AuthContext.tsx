@@ -11,6 +11,10 @@ interface AuthContextType {
   register: (username: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   loading: boolean;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+  clearError: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -26,6 +30,7 @@ export const useAuth = () => {
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     checkAuthStatus();
@@ -86,12 +91,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null);
   };
 
+  const clearError = () => {
+    setError(null);
+  };
+
   const value = {
     user,
     login,
     register,
     logout,
-    loading
+    loading,
+    isAuthenticated: !!user,
+    isLoading: loading,
+    error,
+    clearError
   };
 
   return (

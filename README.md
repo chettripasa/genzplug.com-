@@ -1,171 +1,229 @@
-# 🚀 NexusHub - Next-Generation Social Gaming Platform
+# 🎮 NexusHub - Gaming & Social Platform
 
-## 🌟 **What is NexusHub?**
+A modern, full-stack gaming and social platform built with React, TypeScript, Node.js, and MongoDB.
 
-NexusHub is a revolutionary social gaming platform that combines **video sharing**, **social networking**, **e-commerce**, and **gaming** into one seamless experience. Built with modern technologies and designed for the next generation of content creators and gamers.
+## 🚀 Features
 
-## ✨ **Key Features**
+### 🎮 Gaming Features
+- **Video Streaming & Upload**: Upload and stream gaming content
+- **Game Integration**: Embed and play browser games
+- **Social Gaming**: Connect with other gamers
 
-### 🎥 **Video Platform**
-- **4K Video Upload & Processing** with FFmpeg
-- **Adaptive Streaming** (HLS) for multiple resolutions
-- **Real-time Progress Tracking** via WebSockets
-- **Cloud Storage** integration with Cloudinary
+### 🛒 E-commerce
+- **Gaming Store**: Browse and purchase gaming products
+- **Shopping Cart**: Add, manage, and checkout items
+- **Payment Integration**: Stripe payment processing
 
-### 👥 **Social Networking**
-- **User Profiles** with customizable avatars
-- **Friend System** and social connections
-- **Real-time Chat** with Socket.IO
-- **Content Discovery** and recommendations
+### 👥 Social Features
+- **User Profiles**: Customizable gaming profiles
+- **Content Sharing**: Share posts, videos, and achievements
+- **Community**: Follow other users and build communities
 
-### 🎮 **Gaming Integration**
-- **Leaderboards** and achievements
-- **Gaming Communities** and tournaments
-- **Cross-platform** gaming support
-- **Social Gaming** features
+### 🎛️ Admin Panel
+- **User Management**: Manage users, roles, and permissions
+- **Content Moderation**: Review and moderate user content
+- **Analytics Dashboard**: Platform statistics and insights
 
-### 🛒 **E-commerce**
-- **Digital Product Marketplace**
-- **Secure Payments** with Stripe
-- **Shopping Cart** and checkout
-- **Order Management** system
+## 🛠️ Tech Stack
 
-### 🔐 **Security & Authentication**
-- **JWT-based Authentication**
-- **Role-based Access Control** (User/Moderator/Admin)
-- **Secure API** endpoints
-- **Data Encryption** and protection
-
-## 🛠 **Technology Stack**
-
-### **Backend**
-- **Node.js** with **TypeScript**
-- **Express.js** framework
-- **MongoDB** with **Mongoose** ODM
-- **Socket.IO** for real-time features
-- **FFmpeg** for video processing
-- **Stripe** for payments
-- **Cloudinary** for media storage
-
-### **Frontend**
-- **React 18** with **TypeScript**
-- **Vite** build tool
+### Frontend
+- **React 18** with TypeScript
+- **Vite** for fast development and building
 - **Tailwind CSS** for styling
+- **React Router** for navigation
+- **Zustand** for state management
+- **React Hook Form** for forms
+- **Lucide React** for icons
 - **Framer Motion** for animations
-- **React Query** for state management
-- **Socket.IO Client** for real-time updates
 
-### **Infrastructure**
-- **Vercel** for deployment
-- **MongoDB Atlas** for database
-- **Cloudinary** for CDN
-- **Stripe** for payment processing
+### Backend
+- **Node.js** with TypeScript
+- **Express.js** framework
+- **MongoDB** database
+- **Mongoose** ODM
+- **JWT** authentication
+- **Socket.io** for real-time features
+- **Stripe** payment processing
+- **Cloudinary** for media uploads
 
-## 🚀 **Quick Start**
+### DevOps
+- **Docker** containerization
+- **Nginx** reverse proxy
+- **SSL** certificates
+- **Vercel** deployment ready
 
-### **Prerequisites**
-- Node.js 18+ 
-- MongoDB Atlas account
-- Stripe account
-- Cloudinary account
-- Vercel account
+## 📦 Installation
 
-### **Local Development**
+### Prerequisites
+- Node.js >= 18.0.0
+- npm >= 8.0.0
+- MongoDB (local or cloud)
+
+### Frontend Setup
 ```bash
-# Clone the repository
-git clone https://github.com/chettripasa/genzplug.com-.git
-cd genzplug.com-
-
-# Install backend dependencies
-cd backend
+cd frontend
 npm install
-
-# Install frontend dependencies
-cd ../frontend
-npm install
-
-# Start backend (from backend directory)
-npm run dev
-
-# Start frontend (from frontend directory)
 npm run dev
 ```
 
-### **Environment Setup**
-Create `.env` files in both `backend/` and `frontend/` directories with your credentials.
+### Backend Setup
+```bash
+cd backend
+npm install
+npm run dev
+```
 
-## 📱 **Platform Features**
+### Environment Variables
 
-### **For Content Creators**
-- Upload and process high-quality videos
-- Build engaged communities
-- Monetize content through marketplace
-- Real-time analytics and insights
+#### Frontend (.env)
+```env
+VITE_API_URL=http://localhost:5000
+VITE_CLOUDINARY_URL=https://api.cloudinary.com/v1_1/your-cloud-name
+VITE_CLOUDINARY_UPLOAD_PRESET=your-upload-preset
+VITE_STRIPE_PUBLISHABLE_KEY=pk_test_your-stripe-key
+```
 
-### **For Gamers**
-- Discover new gaming content
-- Join gaming communities
-- Participate in tournaments
-- Connect with fellow gamers
+#### Backend (.env)
+```env
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/nexushub
+JWT_SECRET=your-jwt-secret
+STRIPE_SECRET_KEY=sk_test_your-stripe-secret
+CLOUDINARY_CLOUD_NAME=your-cloud-name
+CLOUDINARY_API_KEY=your-api-key
+CLOUDINARY_API_SECRET=your-api-secret
+```
 
-### **For Users**
-- Social networking with friends
-- Discover trending content
-- Shop digital products
-- Real-time communication
+## 🚀 Development
 
-## 🌐 **Deployment**
+### Available Scripts
 
-### **Vercel Deployment**
-- **Backend:** Serverless functions on Vercel
-- **Frontend:** Static site hosting on Vercel
-- **Automatic deployments** from GitHub
-- **Global CDN** for fast access
+#### Frontend
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run lint         # Run ESLint
+npm run type-check   # TypeScript type checking
+```
 
-### **Environment Variables**
-Configure all necessary environment variables in Vercel project settings for both backend and frontend.
+#### Backend
+```bash
+npm run dev          # Start development server
+npm run build        # Build TypeScript
+npm run start        # Start production server
+npm run test         # Run tests
+```
 
-## 🔒 **Security Features**
+### Project Structure
+```
+nexushub/
+├── frontend/                 # React frontend
+│   ├── src/
+│   │   ├── components/      # Reusable components
+│   │   ├── pages/          # Page components
+│   │   ├── contexts/       # React contexts
+│   │   ├── hooks/         # Custom hooks
+│   │   ├── services/      # API services
+│   │   ├── stores/        # Zustand stores
+│   │   ├── types/         # TypeScript types
+│   │   └── styles/        # CSS styles
+│   └── public/            # Static assets
+├── backend/                # Node.js backend
+│   ├── src/
+│   │   ├── controllers/   # Route controllers
+│   │   ├── models/       # MongoDB models
+│   │   ├── routes/       # API routes
+│   │   ├── middleware/   # Express middleware
+│   │   ├── services/    # Business logic
+│   │   └── config/      # Configuration
+│   └── uploads/          # File uploads
+└── infrastructure/        # Docker & deployment
+```
 
-- **JWT Authentication** with refresh tokens
-- **Rate limiting** and DDoS protection
-- **Input validation** and sanitization
-- **Secure file uploads** with validation
-- **HTTPS enforcement** (Vercel handles this)
+## 🧪 Testing
 
-## 📊 **Performance**
+### Demo Accounts
+- **Regular User**: `demo@nexushub.com` / `demo123`
+- **Admin User**: `admin@nexushub.com` / `admin123`
 
-- **Lazy loading** for videos and images
-- **Optimized database queries** with indexes
-- **CDN integration** for static assets
-- **Real-time updates** via WebSockets
-- **Responsive design** for all devices
+### Test Features
+1. **Authentication**: Login/Register functionality
+2. **Shopping Cart**: Add products, manage quantities
+3. **Admin Panel**: User management, content moderation
+4. **Video System**: Upload and play videos
+5. **Social Features**: Posts, comments, following
 
-## 🤝 **Contributing**
+## 🚀 Deployment
 
-We welcome contributions! Please read our contributing guidelines and submit pull requests.
+### Frontend (Vercel)
+```bash
+cd frontend
+npm run build
+vercel --prod
+```
 
-## 📄 **License**
+### Backend (Railway/Heroku)
+```bash
+cd backend
+npm run build
+# Deploy to your preferred platform
+```
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+### Docker Deployment
+```bash
+docker-compose up -d
+```
 
-## 📞 **Support**
+## 📱 API Documentation
 
-- **Documentation:** Check our deployment guides
-- **Issues:** Report bugs on GitHub
-- **Discussions:** Join our community
+### Authentication
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `GET /api/auth/me` - Get current user
 
-## 🎯 **Roadmap**
+### Products
+- `GET /api/products` - Get all products
+- `GET /api/products/:id` - Get product by ID
+- `POST /api/products` - Create product (admin)
 
-- [ ] **Mobile Apps** (iOS/Android)
-- [ ] **AI-powered Content Recommendations**
-- [ ] **Advanced Analytics Dashboard**
-- [ ] **Multi-language Support**
-- [ ] **Enterprise Features**
-- [ ] **API Documentation**
+### Videos
+- `GET /api/videos` - Get all videos
+- `POST /api/videos` - Upload video
+- `GET /api/videos/:id` - Get video by ID
+
+### Users
+- `GET /api/users` - Get all users (admin)
+- `PUT /api/users/:id` - Update user
+- `DELETE /api/users/:id` - Delete user (admin)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+- **Issues**: [GitHub Issues](https://github.com/yourusername/nexushub/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/yourusername/nexushub/discussions)
+- **Email**: support@nexushub.com
+
+## 🙏 Acknowledgments
+
+- [React](https://reactjs.org/) - UI library
+- [Vite](https://vitejs.dev/) - Build tool
+- [Tailwind CSS](https://tailwindcss.com/) - CSS framework
+- [MongoDB](https://www.mongodb.com/) - Database
+- [Stripe](https://stripe.com/) - Payment processing
+- [Cloudinary](https://cloudinary.com/) - Media management
 
 ---
 
-**Built with ❤️ by the NexusHub Team**
-
-*Ready to revolutionize social gaming? Join NexusHub today!*
+Made with ❤️ by the NexusHub Team

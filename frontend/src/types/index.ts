@@ -2,10 +2,23 @@ export interface User {
   _id: string;
   username: string;
   email: string;
-  profilePic: string;
-  bio: string;
-  isAdmin: boolean;
+  firstName?: string;
+  lastName?: string;
+  profilePic?: string;
+  bio?: string;
+  role: 'user' | 'admin' | 'moderator';
+  isVerified: boolean;
+  isBanned: boolean;
+  banReason?: string;
+  bannedAt?: string;
+  bannedBy?: string;
+  moderationStatus: 'pending' | 'approved' | 'flagged' | 'rejected';
+  lastLoginAt?: string;
+  loginCount: number;
+  followers: string[];
+  following: string[];
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface Product {
@@ -64,8 +77,12 @@ export interface Game {
 }
 
 export interface CartItem {
+  _id?: string;
   product: Product;
   quantity: number;
+  name?: string;
+  price?: number;
+  image?: string;
 }
 
 export interface Order {
@@ -75,4 +92,21 @@ export interface Order {
   total: number;
   status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
   createdAt: string;
+}
+
+export interface Cart {
+  items: CartItem[];
+  total: number;
+  itemCount: number;
+}
+
+export interface Notification {
+  _id: string;
+  id: string;
+  type: 'success' | 'error' | 'warning' | 'info';
+  title: string;
+  message: string;
+  duration?: number;
+  createdAt: string;
+  isRead: boolean;
 }

@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
 import { Notification } from '../types';
-import { notificationsAPI } from '../services/api';
 import { useAuth } from './AuthContext';
 import toast from 'react-hot-toast';
 
@@ -123,21 +122,17 @@ export const NotificationProvider: React.FC<{ children: ReactNode }> = ({ childr
   // Fetch notifications on mount and when authentication changes
   useEffect(() => {
     if (isAuthenticated) {
-      fetchNotifications();
+      // For now, we'll just set loading to false since we don't have the API
+      dispatch({ type: 'SET_LOADING', payload: false });
     }
   }, [isAuthenticated]);
 
-  // Fetch notifications from API
+  // Fetch notifications from API - placeholder for now
   const fetchNotifications = async (): Promise<void> => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
-      const response = await notificationsAPI.getAll();
-      
-      if (response.success && response.data) {
-        dispatch({ type: 'SET_NOTIFICATIONS', payload: response.data });
-      } else {
-        throw new Error(response.message || 'Failed to fetch notifications');
-      }
+      // TODO: Implement when notifications API is ready
+      dispatch({ type: 'SET_LOADING', payload: false });
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || error.message || 'Failed to fetch notifications';
       dispatch({ type: 'SET_ERROR', payload: errorMessage });
@@ -145,33 +140,23 @@ export const NotificationProvider: React.FC<{ children: ReactNode }> = ({ childr
     }
   };
 
-  // Mark notification as read
+  // Mark notification as read - placeholder for now
   const markAsRead = async (notificationId: string): Promise<void> => {
     try {
-      const response = await notificationsAPI.markAsRead(notificationId);
-      
-      if (response.success) {
-        dispatch({ type: 'MARK_AS_READ', payload: notificationId });
-      } else {
-        throw new Error(response.message || 'Failed to mark notification as read');
-      }
+      // TODO: Implement when notifications API is ready
+      dispatch({ type: 'MARK_AS_READ', payload: notificationId });
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || error.message || 'Failed to mark notification as read';
       toast.error(errorMessage);
     }
   };
 
-  // Mark all notifications as read
+  // Mark all notifications as read - placeholder for now
   const markAllAsRead = async (): Promise<void> => {
     try {
-      const response = await notificationsAPI.markAllAsRead();
-      
-      if (response.success) {
-        dispatch({ type: 'MARK_ALL_AS_READ' });
-        toast.success('All notifications marked as read');
-      } else {
-        throw new Error(response.message || 'Failed to mark all notifications as read');
-      }
+      // TODO: Implement when notifications API is ready
+      dispatch({ type: 'MARK_ALL_AS_READ' });
+      toast.success('All notifications marked as read');
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || error.message || 'Failed to mark all notifications as read';
       toast.error(errorMessage);

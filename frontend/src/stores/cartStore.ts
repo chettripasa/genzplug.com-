@@ -32,9 +32,17 @@ export const useCartStore = create<CartStore>()(
               )
             };
           } else {
-            // Add new item
+            // Add new item with proper CartItem structure
+            const newItem: CartItem = {
+              _id: product._id,
+              product,
+              quantity,
+              name: product.name,
+              price: product.price,
+              image: product.images[0] || undefined
+            };
             return {
-              items: [...state.items, { product, quantity }]
+              items: [...state.items, newItem]
             };
           }
         });

@@ -11,7 +11,6 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, showActions = true }) => {
-  const [isHovered, setIsHovered] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
   
   const { addItem, getItemQuantity } = useCartStore();
@@ -76,8 +75,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, showActions = true }
   return (
     <div
       className="group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
       {/* Product Image */}
       <div className="relative aspect-square overflow-hidden">
