@@ -106,7 +106,7 @@ export class MockAdminService {
   }
 
   // User Management
-  static async getUsers(page: number = 1, limit: number = 20, filters?: any): Promise<{ users: any[]; total: number; hasMore: boolean }> {
+  static async getUsers(_page: number = 1, _limit: number = 20, _filters?: any): Promise<{ users: any[]; total: number; hasMore: boolean }> {
     await new Promise(resolve => setTimeout(resolve, 600));
     return {
       users: mockUsers,
@@ -137,7 +137,7 @@ export class MockAdminService {
   }
 
   // Content Management
-  static async getPendingContent(type: 'posts' | 'videos' | 'products', page: number = 1, limit: number = 20): Promise<any> {
+  static async getPendingContent(_type: 'posts' | 'videos' | 'products', _page: number = 1, _limit: number = 20): Promise<any> {
     await new Promise(resolve => setTimeout(resolve, 600));
     return mockPendingContent;
   }
@@ -158,11 +158,11 @@ export class MockAdminService {
   }
 
   // Content Reports
-  static async getContentReports(page: number = 1, limit: number = 20, status?: string): Promise<{ reports: ContentReport[]; total: number; hasMore: boolean }> {
+  static async getContentReports(_page: number = 1, _limit: number = 20, status?: string): Promise<{ reports: ContentReport[]; total: number; hasMore: boolean }> {
     await new Promise(resolve => setTimeout(resolve, 600));
     const filteredReports = status ? mockReports.filter(r => r.status === status) : mockReports;
     return {
-      reports: filteredReports,
+      reports: filteredReports as ContentReport[],
       total: filteredReports.length,
       hasMore: false,
     };
@@ -240,7 +240,7 @@ export class MockAdminService {
     };
   }
 
-  static async getSystemLogs(page: number = 1, limit: number = 50, level?: string): Promise<any> {
+  static async getSystemLogs(_page: number = 1, _limit: number = 50, _level?: string): Promise<any> {
     await new Promise(resolve => setTimeout(resolve, 500));
     return {
       logs: [

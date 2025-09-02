@@ -9,11 +9,11 @@ export interface User {
   role: 'user' | 'admin' | 'moderator';
   isVerified: boolean;
   isBanned: boolean;
-  banReason?: string;
-  bannedAt?: string;
-  bannedBy?: string;
+  banReason: string | undefined;
+  bannedAt: string | undefined;
+  bannedBy: string | undefined;
   moderationStatus: 'pending' | 'approved' | 'flagged' | 'rejected';
-  lastLoginAt?: string;
+  lastLoginAt: string | undefined;
   loginCount: number;
   followers: string[];
   following: string[];

@@ -1,7 +1,7 @@
 import { User } from '../types';
 
 // Mock user data for testing
-const mockUsers = [
+const mockUsers: User[] = [
   {
     _id: '1',
     username: 'admin',
@@ -79,7 +79,7 @@ export const mockAuthAPI = {
   },
 
   // Register new user
-  async register(username: string, email: string, password: string): Promise<{ user: User; token: string }> {
+  async register(username: string, email: string, _password: string): Promise<{ user: User; token: string }> {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     
@@ -101,7 +101,7 @@ export const mockAuthAPI = {
       lastName: '',
       profilePic: undefined,
       bio: undefined,
-      role: 'user',
+      role: 'user' as const,
       isVerified: true,
       isBanned: false,
       banReason: undefined,
