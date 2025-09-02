@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { mockVideos } from '../services/mockData';
 import VideoPlayer from '../components/VideoPlayer';
 import { Play, Eye, Heart, Clock, User } from 'lucide-react';
 
 const VideoPage: React.FC = () => {
-  const [videos, setVideos] = useState(mockVideos);
+  const [videos] = useState(mockVideos);
   const [selectedVideo, setSelectedVideo] = useState(mockVideos[0]);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
 
   const formatDuration = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);

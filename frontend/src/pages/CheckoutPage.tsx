@@ -104,7 +104,7 @@ const CheckoutPage: React.FC = () => {
     }));
   };
 
-  const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setNewCard(prev => ({
       ...prev,

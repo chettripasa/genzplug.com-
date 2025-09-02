@@ -1,4 +1,4 @@
-import { User, Product, Video, Post } from '../types';
+import { User } from '../types';
 
 export interface AdminStats {
   totalUsers: number;

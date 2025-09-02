@@ -8,7 +8,6 @@ import {
   Video, 
   Gamepad2, 
   Star,
-  TrendingUp,
   Eye,
   Heart,
   MessageCircle,
@@ -17,15 +16,12 @@ import {
   Settings,
   BarChart3,
   Activity,
-  Clock,
   DollarSign,
-  ShoppingCart,
-  Live
+  ShoppingCart
 } from 'lucide-react';
 
 const HomePage: React.FC = () => {
   const [currentProductIndex, setCurrentProductIndex] = useState(0);
-  const [isLiveStreamActive, setIsLiveStreamActive] = useState(true);
   const [gameScore, setGameScore] = useState(0);
   const [adminStats, setAdminStats] = useState({
     totalUsers: 12547,
@@ -360,7 +356,7 @@ const HomePage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold mb-4 flex items-center justify-center">
-              <Live className="w-8 h-8 mr-3 text-red-400" />
+              <Activity className="w-8 h-8 mr-3 text-red-400" />
               Live Now
             </h2>
             <p className="text-xl text-purple-200 max-w-3xl mx-auto">

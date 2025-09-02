@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { mockAPI, mockProducts } from '../services/mockData';
+import { mockProducts } from '../services/mockData';
 import ProductCard from '../components/ProductCard';
 import { Filter, Search, Grid, List } from 'lucide-react';
 
 const ShopPage: React.FC = () => {
   const [products, setProducts] = useState(mockProducts);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');

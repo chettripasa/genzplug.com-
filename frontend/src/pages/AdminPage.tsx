@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../contexts/AuthContext';
+
 import { AdminStats, ContentReport, ModerationAction } from '../services/adminService';
 import { MockAdminService } from '../services/mockAdminService';
 
@@ -28,11 +28,10 @@ interface TabData {
   id: string;
   label: string;
   icon: React.ReactNode;
-  count?: number;
+  count: number | undefined;
 }
 
 const AdminPage: React.FC = () => {
-  const { user } = useAuth();
   const { addNotification } = useNotificationStore();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [loading, setLoading] = useState(true);
@@ -48,12 +47,12 @@ const AdminPage: React.FC = () => {
   });
 
   const tabs: TabData[] = [
-    { id: 'dashboard', label: 'Dashboard', icon: <BarChart3 className="w-5 h-5" /> },
+    { id: 'dashboard', label: 'Dashboard', icon: <BarChart3 className="w-5 h-5" />, count: undefined },
     { id: 'users', label: 'Users', icon: <Users className="w-5 h-5" />, count: stats?.totalUsers },
     { id: 'content', label: 'Content', icon: <FileText className="w-5 h-5" />, count: stats?.pendingApprovals },
     { id: 'reports', label: 'Reports', icon: <AlertTriangle className="w-5 h-5" />, count: reports.length },
-    { id: 'analytics', label: 'Analytics', icon: <TrendingUp className="w-5 h-5" /> },
-    { id: 'settings', label: 'Settings', icon: <Settings className="w-5 h-5" /> },
+    { id: 'analytics', label: 'Analytics', icon: <TrendingUp className="w-5 h-5" />, count: undefined },
+    { id: 'settings', label: 'Settings', icon: <Settings className="w-5 h-5" />, count: undefined },
   ];
 
   useEffect(() => {

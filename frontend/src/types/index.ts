@@ -4,8 +4,8 @@ export interface User {
   email: string;
   firstName?: string;
   lastName?: string;
-  profilePic?: string;
-  bio?: string;
+  profilePic: string | undefined;
+  bio: string | undefined;
   role: 'user' | 'admin' | 'moderator';
   isVerified: boolean;
   isBanned: boolean;
@@ -82,7 +82,7 @@ export interface CartItem {
   quantity: number;
   name?: string;
   price?: number;
-  image?: string;
+  image: string | undefined;
 }
 
 export interface Order {
